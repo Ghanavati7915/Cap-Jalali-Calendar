@@ -2,8 +2,6 @@
 
 `Cap Jalali Calendar` is a Jalali Calendar component library for [**Nuxt 3 FrameWork**](https://nuxt.com/).
 
-تقویم شمسی و جلالی برای استفاده در Nuxt 3 ، تولید شده در شرکت چشم انداز آینده پارسیان
-
 ## About
 
 The `Cap Jalali Calendar` is an open-source library developed and maintained by [**CAP Company**](https://i-cap.ir). It is developed using `Nuxt 3` framework and `tailwindcss`.
@@ -35,18 +33,14 @@ npm install Cap-Jalali-Calendar
 pnpm install Cap-Jalali-Calendar
 ```
 
-[//]: # (1. Add `Cap-Jalali-Calendar` to the `modules` of `nuxt.config.ts`)
+1. Add `cap-jalali-calendar-nuxt3` to the `modules` of `nuxt.config.ts`
 
-[//]: # ()
-[//]: # (```js)
 
-[//]: # (export default defineNuxtConfig&#40;{)
-
-[//]: # (  modules: ["@canopassoftware/nuxt-blog-kit"],)
-
-[//]: # (}&#41;;)
-
-[//]: # (```)
+```js
+export default defineNuxtConfig({
+  modules: ['cap-jalali-calendar-nuxt3']
+});
+```
 
 That's it! You can now use library in your Nuxt app ✨
 
