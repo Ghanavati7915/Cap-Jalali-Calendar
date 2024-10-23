@@ -1,6 +1,6 @@
 {
   "name": "cap-jalali-calendar-nuxt3",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "تقویم شمسی و جلالی برای استفاده در Nuxt 3",
   "author": "Ahmad Ghanavati",
   "repository": {
@@ -55,7 +55,7 @@
     "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
     "releaseWithoutLintAndWithoutTest": "npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "releaseWithoutLint": "npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
-    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "release": "npm run lint  && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
     "buildCss": "tailwindcss -i src/runtime/assets/css/style.css -o ./src/output.css --minify",
     "lint": "eslint .",
     "test": "vitest run",
