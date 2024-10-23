@@ -1,0 +1,88 @@
+{
+  "name": "cap-jalali-calendar-nuxt3",
+  "version": "0.0.2",
+  "description": "تقویم شمسی و جلالی برای استفاده در Nuxt 3",
+  "author": "Ahmad Ghanavati",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ghanavati7915/Cap-Jalali-Calendar-Nuxt3.git"
+  },
+  "homepage": "https://github.com/Ghanavati7915/Cap-Jalali-Calendar-Nuxt3#readme",
+  "bugs": "https://github.com/Ghanavati7915/Cap-Jalali-Calendar-Nuxt3/issues",
+  "changelog": {
+    "repo": {
+      "provider": "github"
+    }
+  },
+  "license": "MIT",
+  "type": "module",
+  "keywords": [
+    "cap",
+    "iran",
+    "farsi",
+    "jalali",
+    "shamsi",
+    "ghanavati",
+    "etezadi",
+    "isfahan",
+    "nuxt",
+    "nuxt-module",
+    "capJalaliCalendarNuxt3",
+    "cap_jalali_calendar_nuxt3",
+    "cap-jalali-calendar-nuxt3",
+    "components",
+    "component library",
+    "nuxt library",
+    "nuxt module",
+    "nuxt3"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/types.d.ts",
+      "import": "./dist/module.mjs",
+      "require": "./dist/module.cjs"
+    }
+  },
+  "main": "./dist/module.cjs",
+  "types": "./dist/types.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "prepack": "nuxt-module-build build",
+    "dev": "nuxi dev playground",
+    "dev:build": "nuxi build playground",
+    "dev:prepare": "nuxt-module-build build --stub && nuxt-module-build prepare && nuxi prepare playground",
+    "releaseWithoutLintAndWithoutTest": "npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "releaseWithoutLint": "npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "release": "npm run lint && npm run test && npm run prepack && changelogen --release && npm publish && git push --follow-tags",
+    "buildCss": "tailwindcss -i src/runtime/assets/css/style.css -o ./src/output.css --minify",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:watch": "vitest watch",
+    "test:types": "vue-tsc --noEmit && cd playground && vue-tsc --noEmit"
+  },
+  "dependencies": {
+    "@nuxt/kit": "^3.13.2",
+    "@nuxtjs/tailwindcss": "^6.12.2",
+    "jalaali-js": "^1.2.7",
+    "moment-jalaali": "^0.10.1",
+    "nuxt-icon": "1.0.0-beta.7",
+    "vue-tippy": "^6.5.0"
+  },
+  "devDependencies": {
+    "@nuxt/devtools": "^1.6.0",
+    "@nuxt/eslint-config": "^0.6.0",
+    "@nuxt/icon": "^1.5.6",
+    "@nuxt/module-builder": "^0.8.4",
+    "@nuxt/schema": "^3.13.2",
+    "@nuxt/test-utils": "^3.14.2",
+    "@types/node": "latest",
+    "changelogen": "^0.5.7",
+    "eslint": "^9.12.0",
+    "nuxt": "^3.13.0",
+    "typescript": "latest",
+    "vitest": "^2.1.3",
+    "vue-tsc": "^2.1.6"
+  }
+}
