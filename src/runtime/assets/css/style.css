@@ -1,0 +1,229 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+
+.rtl{
+  direction: rtl !important;
+}
+
+.ltr{
+  direction: ltr !important;
+}
+
+/*#region FONTS*/
+/*--------------- FA ---------------*/
+
+/*Estedad-FD-Black*/
+@font-face {
+  font-family: "Estedad-FD-Black";
+  src: url('../fonts/Estedad/fa/Estedad-FD-Black.ttf') format("truetype");
+}
+
+/*Estedad-FD-Bold*/
+@font-face {
+  font-family: "Estedad-FD-Bold";
+  src: url('../fonts/Estedad/fa/Estedad-FD-Bold.ttf') format("truetype");
+}
+
+/*Estedad-FD-Medium*/
+@font-face {
+  font-family: "Estedad-FD-Medium";
+  src: url('../fonts/Estedad/fa/Estedad-FD-Medium.ttf') format("truetype");
+}
+
+/*Estedad-FD-Light*/
+@font-face {
+  font-family: "Estedad-FD-Light";
+  src: url('../fonts/Estedad/fa/Estedad-FD-Light.ttf') format("truetype");
+}
+
+/*Estedad-FD-Thin*/
+@font-face {
+  font-family: "Estedad-FD-Thin";
+  src: url('../fonts/Estedad/fa/Estedad-FD-Thin.ttf') format("truetype");
+}
+
+.Estedad_FD_Black {
+  font-family: 'Estedad-FD-Black', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Bold {
+  font-family: 'Estedad-FD-Bold', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Medium {
+  font-family: 'Estedad-FD-Medium', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Light {
+  font-family: 'Estedad-FD-Light', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD_Thin {
+  font-family: 'Estedad-FD-Thin', Tahoma, Sans-Serif !important;
+}
+
+.Estedad_FD {
+  font-family: 'Estedad-FD-Medium', Tahoma, Sans-Serif !important;
+}
+
+
+
+/*--------------- EN ---------------*/
+
+/*Estedad-Black*/
+@font-face {
+  font-family: "Estedad-Black";
+  src: url('../fonts/Estedad/en/Estedad-Black.ttf') format("truetype");
+}
+
+/*Estedad-Bold*/
+@font-face {
+  font-family: "Estedad-Bold";
+  src: url('../fonts/Estedad/en/Estedad-Bold.ttf') format("truetype");
+}
+
+/*Estedad-Medium*/
+@font-face {
+  font-family: "Estedad-Medium";
+  src: url('../fonts/Estedad/en/Estedad-Medium.ttf') format("truetype");
+}
+
+/*Estedad-Light*/
+@font-face {
+  font-family: "Estedad-Light";
+  src: url('../fonts/Estedad/en/Estedad-Light.ttf') format("truetype");
+}
+
+/*Estedad-Thin*/
+@font-face {
+  font-family: "Estedad-Thin";
+  src: url('../fonts/Estedad/en/Estedad-Thin.ttf') format("truetype");
+}
+
+.Estedad_Black {
+  font-family: 'Estedad-Black', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Bold {
+  font-family: 'Estedad-Bold', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Medium {
+  font-family: 'Estedad-Medium', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Light {
+  font-family: 'Estedad-Light', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad_Thin {
+  font-family: 'Estedad-Thin', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+
+.Estedad {
+  font-family: 'Estedad-Medium', Tahoma, Open Sans Regular, Sans-Serif !important;
+}
+/*#endregion*/
+
+/*#region Calendar*/
+.ca-full {
+  @apply lg:flex lg:h-full lg:flex-col flex relative p-8;
+
+  .ca-header {
+    @apply flex items-center justify-between border-b border-gray-200 px-6 py-4 lg:flex-none ;
+
+    .selectedYearMonth {
+      @apply text-base font-semibold leading-6 text-gray-900;
+    }
+
+    .toolbar {
+      @apply relative flex items-center rounded-md bg-white shadow-sm md:items-stretch;
+
+      .arrow-left {
+        @apply flex h-9 w-12 items-center justify-center rounded-l-md border-y border-l border-gray-300 pr-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pr-0 md:hover:bg-gray-50;
+      }
+
+      .arrow-right {
+        @apply flex h-9 w-12 items-center justify-center rounded-r-md border-y border-r border-gray-300 pl-1 text-gray-400 hover:text-gray-500 focus:relative md:w-9 md:pl-0 md:hover:bg-gray-50;
+      }
+
+      .today {
+        @apply hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block;
+      }
+
+      button {
+        @apply hidden border-y border-gray-300 px-3.5 text-sm font-semibold text-gray-900 hover:bg-gray-50 focus:relative md:block;
+      }
+    }
+  }
+
+  .ca-body {
+    @apply shadow ring-1 ring-black ring-opacity-5 lg:flex lg:flex-auto lg:flex-col;
+
+    .days-header {
+      @apply grid grid-cols-7 gap-px border-b border-gray-300 bg-white py-3 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none;
+
+      .item {
+        @apply flex justify-center bg-white py-2;
+      }
+    }
+
+    .days-content {
+      @apply flex bg-gray-200 text-xs leading-6 text-gray-700 lg:flex-auto;
+      .days{
+        @apply w-full lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-px;
+
+        .day {
+          @apply relative px-3 py-2;
+          height: 120px;
+          min-height: 120px;
+          max-height: 160px;
+        }
+
+        .day.today{
+          @apply !bg-amber-200/50;
+        }
+
+        .day.normal {
+          @apply bg-white;
+        }
+
+        .day.outBound {
+          @apply bg-gray-100 text-gray-500;
+        }
+      }
+    }
+  }
+
+}
+
+.event{
+  @apply mt-1;
+}
+
+.event-title{
+  @apply flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600;
+}
+
+.event-time{
+  @apply ml-3 hidden flex-none text-gray-500 group-hover:text-indigo-600 xl:block;
+}
+
+.monthSelectorModal{
+  @apply w-screen h-screen bg-black/70 fixed top-0 left-0 justify-center items-center flex;
+
+  .body{
+    @apply w-1/3 min-h-64 bg-white rounded-lg p-8 flex flex-col;
+  }
+
+  .monthItem{
+    @apply rounded-sm border border-slate-500 justify-center items-center p-3 text-center cursor-pointer transition-all duration-500 hover:bg-blue-500 hover:text-white;
+  }
+
+  .cancelButton {
+    @apply bg-transparent mt-8 hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded;
+  }
+}
+/*#endregion*/
