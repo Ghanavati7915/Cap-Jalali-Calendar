@@ -32,6 +32,7 @@ export interface DayEvent {
   color: string
   time: string
   date: string
-  extra?: any | null
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  extra?: any
   action: EventActions
 }

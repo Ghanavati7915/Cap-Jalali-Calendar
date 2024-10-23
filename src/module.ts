@@ -15,7 +15,7 @@ export default defineNuxtModule<ModuleOptions>({
     css: true,
   },
   async setup(options, nuxt) {
-    // @ts-ignore
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const resolver = createResolver(import.meta.url)
 
     nuxt.options.css.push(resolver.resolve('./output.css'))

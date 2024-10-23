@@ -85,7 +85,7 @@ interface DayEvent {
   color: string
   time: string
   date: string
-  extra?: any
+  extra?: unknown
   action: EventActions
 }
 enum EventActions {
@@ -164,9 +164,11 @@ const events = computed<DayEvent[]>(() => {
   return _events.value
 })
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const eventClickListener = (data: any) => {
   console.log('event Click : ', data)
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const onChangeMonthListener = (data: any) => {
   console.log('onChangeMonth : ', data)
 }

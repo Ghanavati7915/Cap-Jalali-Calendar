@@ -128,6 +128,7 @@ const onEvent = (day: Days, event: DayEvent) => {
 // #region Watch
 watch(
   () => props.events,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (data: any) => {
     calendarEvents.value = []
     data.forEach((event: DayEvent) => {
