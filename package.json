@@ -1,6 +1,6 @@
 {
   "name": "cap-jalali-calendar-nuxt3",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "تقویم شمسی و جلالی برای استفاده در Nuxt 3",
   "author": "Ahmad Ghanavati",
   "repository": {
@@ -65,15 +65,14 @@
   "dependencies": {
     "@nuxt/kit": "^3.13.2",
     "@nuxtjs/tailwindcss": "^6.12.2",
-    "jalaali-js": "^1.2.7",
     "moment-jalaali": "^0.10.1",
     "nuxt-icon": "1.0.0-beta.7",
+    "@nuxt/icon": "^1.5.6",
     "vue-tippy": "^6.5.0"
   },
   "devDependencies": {
     "@nuxt/devtools": "^1.6.0",
     "@nuxt/eslint-config": "^0.6.0",
-    "@nuxt/icon": "^1.5.6",
     "@nuxt/module-builder": "^0.8.4",
     "@nuxt/schema": "^3.13.2",
     "@nuxt/test-utils": "^3.14.2",
