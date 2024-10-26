@@ -7,15 +7,15 @@ export interface ModuleOptions {
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
-    name: 'my-module',
-    configKey: 'myModule',
+    name: 'cap-jalali-calendar-nuxt3',
+    configKey: 'nothing',
   },
   // Default configuration options of the Nuxt module
   defaults: {
     css: true,
   },
   async setup(options, nuxt) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // @typescript-eslint/no-explicit-any
     const resolver = createResolver(import.meta.url)
 
     nuxt.options.css.push(resolver.resolve('./output.css'))
