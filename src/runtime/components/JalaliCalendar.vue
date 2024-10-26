@@ -149,6 +149,7 @@ onMounted(async () => {
 
 <template>
   <div class="p-5">
+    <client-only>
     <!-- #region Loading -->
     <div
       v-if="loading"
@@ -352,6 +353,7 @@ onMounted(async () => {
       </div>
     </div>
     <!-- #endregion -->
+    </client-only>
   </div>
 </template>
 
