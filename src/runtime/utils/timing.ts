@@ -1,4 +1,4 @@
-import moment from 'moment-jalaali'
+import * as moment from 'moment-jalaali'
 import fa from 'moment/src/locale/fa'
 import type { Current, Days, Month } from '~/src/runtime/interfaces/calendar'
 
