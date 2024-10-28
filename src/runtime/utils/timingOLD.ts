@@ -1,9 +1,9 @@
-import * as moment from 'moment-jalaali'
-moment.locale('fa') // تنظیم زبان فارسی
-moment.loadPersian({ dialect: 'persian-modern' }) // فارسی‌سازی مدرن
-
+import * as moment from 'moment-jalaali' // فارسی‌سازی مدرن
 
 import type { Current, Days, Month } from '~/src/runtime/interfaces/calendar'
+
+moment.locale('fa') // تنظیم زبان فارسی
+moment.loadPersian({ dialect: 'persian-modern' })
 
 enum MonthAction {
   Now = 'now',

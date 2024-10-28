@@ -23,15 +23,17 @@ export const convertToJalali = (dt: string) =>
 export const getCurrentMonthAndYear = (
   year?: number,
   month?: string,
-  action: MonthAction = MonthAction.Now
+  action: MonthAction = MonthAction.Now,
 ): Current => {
   let date = jDayjs()
 
   if (action === MonthAction.Jump) {
     date = jDayjs(`${year}/${month}/01`)
-  } else if (action === MonthAction.Next) {
+  }
+  else if (action === MonthAction.Next) {
     date = date.add(1, 'month')
-  } else if (action === MonthAction.Prev) {
+  }
+  else if (action === MonthAction.Prev) {
     date = date.subtract(1, 'month')
   }
 
@@ -59,7 +61,7 @@ export const getMonthsOfYear = (year: string): Month[] =>
 // دریافت تمامی روزها بین دو تاریخ مشخص
 export const getDaysBetweenDates = (
   startDate: string,
-  endDate: string
+  endDate: string,
 ): Days[] => {
   const start = jDayjs(startDate)
   const end = jDayjs(endDate)
