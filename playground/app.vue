@@ -67,7 +67,7 @@
       <template #event="{ event }">
         <a
           href="javascript:"
-          class="flex rounded-lg p-2 bg-rose-400 text-white"
+          class="flex rounded-lg p-1 bg-rose-400 text-white my-1"
         >
           <p class="custom-title">{{ event.title }} (سفارشی شده)</p>
         </a>

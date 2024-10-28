@@ -18,7 +18,7 @@ export default defineNuxtModule<ModuleOptions>({
     // @typescript-eslint/no-explicit-any
     const resolver = createResolver(import.meta.url)
 
-    nuxt.options.css.push(resolver.resolve('./output.css'))
+    // nuxt.options.css.push(resolver.resolve('./output.css'))
 
     nuxt.options.modules.push('@nuxtjs/tailwindcss', '@nuxt/icon')
 
