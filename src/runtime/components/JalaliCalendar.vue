@@ -150,208 +150,208 @@ onMounted(async () => {
 <template>
   <div class="p-5">
     <client-only>
-    <!-- #region Loading -->
-    <div
-      v-if="loading"
-      class="flex flex-col justify-center items-center h-56 w-full rtl Estedad_FD_Light"
-    >
-      <Icon
-        name="line-md:loading-twotone-loop"
-        size="35"
-      />
-      <p class="mt-4">
-        در حال آماده سازی تقویم ، لطفا صبر کنید ...
-      </p>
-    </div>
+      <!-- #region Loading -->
+      <div
+        v-if="loading"
+        class="flex flex-col justify-center items-center h-56 w-full rtl Estedad_FD_Light"
+      >
+        <Icon
+          name="line-md:loading-twotone-loop"
+          size="35"
+        />
+        <p class="mt-4">
+          در حال آماده سازی تقویم ، لطفا صبر کنید ...
+        </p>
+      </div>
 
-    <!-- #region Main Content -->
-    <div v-if="!loading">
-      <!-- #region Calendar -->
-      <div class="ca-full">
-        <!-- #region Header -->
-        <header class="ca-header rtl">
-          <!-- #region Selected Month And Year -->
-          <h1 class="selectedYearMonth Estedad_FD_Medium">
-            <span v-if="current"> {{ selected.month }} ماه {{ selected.year }} </span>
-          </h1>
-          <!-- #endregion -->
-          <!-- #region Change Month -->
-          <div class="flex items-center">
-            <div class="toolbar ltr">
-              <!-- BTN Next Month -->
-              <button
-                v-tippy="'ماه بعد'"
-                type="button"
-                class="arrow-left"
-                @click="nextMonth"
-              >
-                <Icon name="ep:arrow-left-bold" />
-              </button>
-              <!-- BTN Change Month -->
-              <button
-                v-if="showMonthSelector"
-                v-tippy="'انتخاب ماه'"
-                type="button"
-                class="today Estedad_FD_Medium"
-                @click="monthSelectorModal = true"
-              >
-                سایر
-              </button>
-              <!-- BTN Current Month -->
-              <button
-                v-tippy="'ماه جاری'"
-                type="button"
-                class="today Estedad_FD_Medium"
-                @click="currentMonth"
-              >
-                امروز
-              </button>
-
-              <!-- Slot Custom Buttons -->
-              <slot name="customButton" />
-              <!-- #endregion -->
-
-              <!-- BTN Prev Month -->
-              <button
-                v-tippy="'ماه قبل'"
-                type="button"
-                class="arrow-right"
-                @click="prevMonth"
-              >
-                <Icon name="ep:arrow-right-bold" />
-              </button>
-            </div>
-          </div>
-          <!-- #endregion -->
-        </header>
-        <!-- #endregion -->
-
-        <!-- #region Body -->
-        <div class="ca-body relative">
-          <!-- #region Days Header -->
-          <div class="days-header rtl">
-            <div
-              v-for="(dow, i) in daysOfWeek"
-              :key="`dayOfWeek_${i}`"
-              class="item"
-            >
-              <span class="font-bold text-sm Estedad_FD_Medium">{{ dow.title }}</span>
-            </div>
-          </div>
-          <!-- #endregion -->
-
-          <!-- #region Days -->
-          <div class="days-content">
-            <div class="days rtl Estedad_FD_Light">
-              <div
-                v-for="(day, i) in days"
-                :key="`day_${i}`"
-                class="day"
-                :class="[day ? 'normal' : 'outBound', (isToDay(day) && cellTodayClass) ? cellTodayClass : '', (isToDay(day) && !cellTodayClass) ? 'today' : '', cellClass ? cellClass : '']"
-              >
-                <div
-                  v-if="day"
-                  class="flex flex-col"
+      <!-- #region Main Content -->
+      <div v-if="!loading">
+        <!-- #region Calendar -->
+        <div class="ca-full">
+          <!-- #region Header -->
+          <header class="ca-header rtl">
+            <!-- #region Selected Month And Year -->
+            <h1 class="selectedYearMonth Estedad_FD_Medium">
+              <span v-if="current"> {{ selected.month }} ماه {{ selected.year }} </span>
+            </h1>
+            <!-- #endregion -->
+            <!-- #region Change Month -->
+            <div class="flex items-center">
+              <div class="toolbar ltr">
+                <!-- BTN Next Month -->
+                <button
+                  v-tippy="'ماه بعد'"
+                  type="button"
+                  class="arrow-left"
+                  @click="nextMonth"
                 >
-                  <div class="flex flex-row justify-between items-center">
-                    <span>{{ day.day }}</span>
-                    <span
-                      v-if="isToDay(day)"
-                      class="text-rose-500"
-                    > امروز </span>
-                  </div>
+                  <Icon name="ep:arrow-left-bold" />
+                </button>
+                <!-- BTN Change Month -->
+                <button
+                  v-if="showMonthSelector"
+                  v-tippy="'انتخاب ماه'"
+                  type="button"
+                  class="today Estedad_FD_Medium"
+                  @click="monthSelectorModal = true"
+                >
+                  سایر
+                </button>
+                <!-- BTN Current Month -->
+                <button
+                  v-tippy="'ماه جاری'"
+                  type="button"
+                  class="today Estedad_FD_Medium"
+                  @click="currentMonth"
+                >
+                  امروز
+                </button>
 
-                  <ol
-                    v-if="day.events.length > 0"
-                    class="event"
+                <!-- Slot Custom Buttons -->
+                <slot name="customButton" />
+                <!-- #endregion -->
+
+                <!-- BTN Prev Month -->
+                <button
+                  v-tippy="'ماه قبل'"
+                  type="button"
+                  class="arrow-right"
+                  @click="prevMonth"
+                >
+                  <Icon name="ep:arrow-right-bold" />
+                </button>
+              </div>
+            </div>
+          <!-- #endregion -->
+          </header>
+          <!-- #endregion -->
+
+          <!-- #region Body -->
+          <div class="ca-body relative">
+            <!-- #region Days Header -->
+            <div class="days-header rtl">
+              <div
+                v-for="(dow, i) in daysOfWeek"
+                :key="`dayOfWeek_${i}`"
+                class="item"
+              >
+                <span class="font-bold text-sm Estedad_FD_Medium">{{ dow.title }}</span>
+              </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region Days -->
+            <div class="days-content">
+              <div class="days rtl Estedad_FD_Light">
+                <div
+                  v-for="(day, i) in days"
+                  :key="`day_${i}`"
+                  class="day"
+                  :class="[day ? 'normal' : 'outBound', (isToDay(day) && cellTodayClass) ? cellTodayClass : '', (isToDay(day) && !cellTodayClass) ? 'today' : '', cellClass ? cellClass : '']"
+                >
+                  <div
+                    v-if="day"
+                    class="flex flex-col"
                   >
-                    <li
-                      v-for="(event, z) in day.events.slice(0, 2)"
-                      :key="`event_${i}${z}`"
-                      @click="onEvent(day, event)"
+                    <div class="flex flex-row justify-between items-center">
+                      <span>{{ day.day }}</span>
+                      <span
+                        v-if="isToDay(day)"
+                        class="text-rose-500"
+                      > امروز </span>
+                    </div>
+
+                    <ol
+                      v-if="day.events.length > 0"
+                      class="event"
                     >
-                      <!-- #region Slot برای محتوای رویداد -->
-                      <slot
-                        name="event"
-                        :event="event"
+                      <li
+                        v-for="(event, z) in day.events.slice(0, 2)"
+                        :key="`event_${i}${z}`"
+                        @click="onEvent(day, event)"
                       >
-                        <!-- محتوای پیش‌فرض در صورت نبودن slot -->
+                        <!-- #region Slot برای محتوای رویداد -->
+                        <slot
+                          name="event"
+                          :event="event"
+                        >
+                          <!-- محتوای پیش‌فرض در صورت نبودن slot -->
+                          <a
+                            href="javascript:"
+                            class="group flex"
+                          >
+                            <p class="event-title">{{ event.title }}</p>
+                            <time
+                              v-if="event.time"
+                              :datetime="`${event.date} ${event.time}`"
+                              class="event-time"
+                            >
+                              {{ event.time }}
+                            </time>
+                          </a>
+                        </slot>
+                      <!-- #endregion -->
+                      </li>
+
+                      <li v-if="day.events.length > 2">
                         <a
                           href="javascript:"
                           class="group flex"
                         >
-                          <p class="event-title">{{ event.title }}</p>
-                          <time
-                            v-if="event.time"
-                            :datetime="`${event.date} ${event.time}`"
-                            class="event-time"
-                          >
-                            {{ event.time }}
-                          </time>
+                          <p class="event-title">مشاهده همه موارد</p>
+                          <span class="event-time">{{ day.events.length }} مورد</span>
                         </a>
-                      </slot>
-                      <!-- #endregion -->
-                    </li>
-
-                    <li v-if="day.events.length > 2">
-                      <a
-                        href="javascript:"
-                        class="group flex"
-                      >
-                        <p class="event-title">مشاهده همه موارد</p>
-                        <span class="event-time">{{ day.events.length }} مورد</span>
-                      </a>
-                    </li>
-                  </ol>
+                      </li>
+                    </ol>
+                  </div>
                 </div>
               </div>
             </div>
+          <!-- #endregion -->
           </div>
           <!-- #endregion -->
-        </div>
-        <!-- #endregion -->
 
-        <!-- #region copyright -->
-        <a
-          href="https://i-cap.ir"
-          target="_blank"
-          class="copyright Estedad_FD_Light"
-        >
-          <span class="mx-2">قدرت گرفته از چشم انداز آینده پارسیان</span>
-          <img
-            src="../assets/img/logo.png"
-            class="w-5 h-5 object-cover"
+          <!-- #region copyright -->
+          <a
+            href="https://i-cap.ir"
+            target="_blank"
+            class="copyright Estedad_FD_Light"
           >
-        </a>
+            <span class="mx-2">قدرت گرفته از چشم انداز آینده پارسیان</span>
+            <img
+              src="../assets/img/logo.png"
+              class="w-5 h-5 object-cover"
+            >
+          </a>
         <!-- #endregion -->
-      </div>
+        </div>
       <!-- #endregion -->
-    </div>
-
-    <!-- #region Month Selector Modal -->
-    <div
-      v-if="!loading && monthSelectorModal"
-      class="monthSelectorModal"
-    >
-      <div class="body">
-        <div class="grid grid-cols-4 gap-4 Estedad_FD_Light rtl">
-          <div
-            v-for="(month, i) in months"
-            :key="`monthSelector_${i}`"
-            class="monthItem rtl"
-            @click="jumpMonth(month.name);monthSelectorModal = false"
-          >
-            {{ month.name }}
-          </div>
-        </div>
-        <button
-          class="cancelButton Estedad_FD_Light"
-          @click="monthSelectorModal = false"
-        >
-          انصراف
-        </button>
       </div>
-    </div>
+
+      <!-- #region Month Selector Modal -->
+      <div
+        v-if="!loading && monthSelectorModal"
+        class="monthSelectorModal"
+      >
+        <div class="body">
+          <div class="grid grid-cols-4 gap-4 Estedad_FD_Light rtl">
+            <div
+              v-for="(month, i) in months"
+              :key="`monthSelector_${i}`"
+              class="monthItem rtl"
+              @click="jumpMonth(month.name);monthSelectorModal = false"
+            >
+              {{ month.name }}
+            </div>
+          </div>
+          <button
+            class="cancelButton Estedad_FD_Light"
+            @click="monthSelectorModal = false"
+          >
+            انصراف
+          </button>
+        </div>
+      </div>
     <!-- #endregion -->
     </client-only>
   </div>
