@@ -37,6 +37,10 @@ export default defineNuxtModule<ModuleOptions>({
 
     await installModule('@nuxt/icon')
 
+    await installModule('dayjs')
+
+    await installModule('jalaliday')
+
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))
 

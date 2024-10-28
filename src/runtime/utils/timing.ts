@@ -1,9 +1,12 @@
-import moment from 'moment-jalaali'
-import fa from 'moment/src/locale/fa'
+import dayjs from 'dayjs'
+import jalaliday from 'jalaliday'
 import type { Current, Days, Month } from '~/src/runtime/interfaces/calendar'
 
-moment.locale('fa', fa)
-moment.loadPersian()
+dayjs.extend(jalaliday)
+
+// تنظیم منطقه زمانی به شمسی
+const jDayjs = (date?: string | Date) =>
+  dayjs(date).calendar('jalali').locale('fa')
 
 enum MonthAction {
   Now = 'now',
@@ -12,45 +15,54 @@ enum MonthAction {
   Jump = 'jump',
 }
 
-export const convertToJalali = (dt: string) => moment(dt).format('jYYYY/jMM/jDD')
-export const getCurrentMonthAndYear = (year?: number, month?: string, action: MonthAction = MonthAction.Now): Current => {
-  let date
+// تبدیل تاریخ میلادی به جلالی
+export const convertToJalali = (dt: string) =>
+  jDayjs(dt).format('YYYY/MM/DD')
 
-  if (action === MonthAction.Now) {
-    date = moment()
-  }
-  else if (action === MonthAction.Jump) {
-    date = moment(`${year}/${month}/01`, 'jYYYY/jMMMM/jDD')
-  }
-  else {
-    date = moment(`${year}/${month}/01`, 'jYYYY/jMMMM/jDD')
-    if (action === MonthAction.Next) {
-      date.add(1, 'month')
-    }
-    else if (action === MonthAction.Prev) {
-      date.subtract(1, 'month')
-    }
+// گرفتن ماه و سال جاری، ماه بعد، ماه قبل و ماه دلخواه
+export const getCurrentMonthAndYear = (
+  year?: number,
+  month?: string,
+  action: MonthAction = MonthAction.Now
+): Current => {
+  let date = jDayjs()
+
+  if (action === MonthAction.Jump) {
+    date = jDayjs(`${year}/${month}/01`)
+  } else if (action === MonthAction.Next) {
+    date = date.add(1, 'month')
+  } else if (action === MonthAction.Prev) {
+    date = date.subtract(1, 'month')
   }
 
-  return { day: date.format('jDD'), month: date.format('jMMMM'), year: date.format('jYYYY') }
+  return {
+    day: date.format('DD'),
+    month: date.format('MMMM'),
+    year: date.format('YYYY'),
+  }
 }
 
+// دریافت تمامی ماه‌ها در یک سال مشخص
 export const getMonthsOfYear = (year: string): Month[] =>
   Array.from({ length: 12 }, (_, month) => {
-    const start = moment(`${year}/${month + 1}/01`, 'jYYYY/jM/jD')
+    const start = jDayjs(`${year}/${month + 1}/01`)
     return {
       id: month + 1,
-      name: start.format('jMMMM'),
-      start: start.format('jYYYY/jMM/jDD'),
-      end: start.clone().endOf('jMonth').format('jYYYY/jMM/jDD'),
-      startEn: start.format('YYYY/MM/DD'),
-      endEn: start.clone().endOf('jMonth').format('YYYY/MM/DD'),
+      name: start.format('MMMM'),
+      start: start.format('YYYY/MM/DD'),
+      end: start.endOf('month').format('YYYY/MM/DD'),
+      startEn: start.calendar('gregory').format('YYYY/MM/DD'),
+      endEn: start.endOf('month').calendar('gregory').format('YYYY/MM/DD'),
     }
   })
 
-export const getDaysBetweenDates = (startDate: string, endDate: string): Days[] => {
-  const start = moment(startDate, 'jYYYY/jMM/jDD')
-  const end = moment(endDate, 'jYYYY/jMM/jDD')
+// دریافت تمامی روزها بین دو تاریخ مشخص
+export const getDaysBetweenDates = (
+  startDate: string,
+  endDate: string
+): Days[] => {
+  const start = jDayjs(startDate)
+  const end = jDayjs(endDate)
   const weekDays = ['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'آدینه']
 
   const daysArray: Days[] = []
@@ -61,9 +73,9 @@ export const getDaysBetweenDates = (startDate: string, endDate: string): Days[] 
     if (index === -1) index = weekDays.indexOf(dayOfWeek)
 
     daysArray.push({
-      date: start.format('jYYYY/jMM/jDD'),
-      dateEn: start.format('YYYY/MM/DD'),
-      day: +start.format('jD'),
+      date: start.format('YYYY/MM/DD'),
+      dateEn: start.calendar('gregory').format('YYYY/MM/DD'),
+      day: +start.format('D'),
       dayOfWeek,
       index,
       events: [],
