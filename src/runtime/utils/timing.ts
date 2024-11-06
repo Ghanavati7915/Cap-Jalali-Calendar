@@ -70,6 +70,7 @@ export const getDaysBetweenDates = (
   const daysArray: Days[] = []
   let index = -1
 
+  //@ts-ignore
   while (start.isSameOrBefore(end)) {
     const dayOfWeek = start.format('dddd')
     if (index === -1) index = weekDays.indexOf(dayOfWeek)
