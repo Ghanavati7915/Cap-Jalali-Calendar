@@ -1,19 +1,15 @@
 import { defineNuxtModule, addPlugin, createResolver, installModule, addComponentsDir } from '@nuxt/kit'
 
 // Module options TypeScript interface definition
-export interface ModuleOptions {
-  css: boolean
-}
+export interface ModuleOptions {}
 
 export default defineNuxtModule<ModuleOptions>({
   meta: {
     name: 'cap-jalali-calendar-nuxt3',
-    configKey: 'nothing',
+    configKey: 'cap-jalali-calendar-nuxt3',
   },
   // Default configuration options of the Nuxt module
-  defaults: {
-    css: true,
-  },
+  defaults: {},
   async setup(options, nuxt) {
     // @typescript-eslint/no-explicit-any
     const resolver = createResolver(import.meta.url)
@@ -43,6 +39,8 @@ export default defineNuxtModule<ModuleOptions>({
 
     // Do not add the extension since the `.ts` will be transpiled to `.mjs` after `npm run prepack`
     addPlugin(resolver.resolve('./runtime/plugin'))
+
+
 
     await addComponentsDir({
       path: resolver.resolve('./runtime/components'), // path of components
