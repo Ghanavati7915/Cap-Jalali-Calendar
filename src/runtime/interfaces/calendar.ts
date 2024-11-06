@@ -7,8 +7,8 @@ export interface DayOfWeek {
 }
 export interface Current {
   month: string
-  year: number
-  day: string
+  year: number | string
+  day: number | string
 }
 export interface Month {
   id: number

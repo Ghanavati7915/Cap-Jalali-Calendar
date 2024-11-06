@@ -1,8 +1,10 @@
 import dayjs from 'dayjs'
 import jalaliday from 'jalaliday'
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import type { Current, Days, Month } from '~/src/runtime/interfaces/calendar'
 
 dayjs.extend(jalaliday)
+dayjs.extend(isSameOrBefore)
 
 // تنظیم منطقه زمانی به شمسی
 const jDayjs = (date?: string | Date) =>
@@ -21,9 +23,9 @@ export const convertToJalali = (dt: string) =>
 
 // گرفتن ماه و سال جاری، ماه بعد، ماه قبل و ماه دلخواه
 export const getCurrentMonthAndYear = (
-  year?: number,
-  month?: string,
   action: MonthAction = MonthAction.Now,
+  year?: number | string | null,
+  month?: string | null,
 ): Current => {
   let date = jDayjs()
 
@@ -45,7 +47,7 @@ export const getCurrentMonthAndYear = (
 }
 
 // دریافت تمامی ماه‌ها در یک سال مشخص
-export const getMonthsOfYear = (year: string): Month[] =>
+export const getMonthsOfYear = (year: string | number): Month[] =>
   Array.from({ length: 12 }, (_, month) => {
     const start = jDayjs(`${year}/${month + 1}/01`)
     return {
@@ -59,7 +61,7 @@ export const getMonthsOfYear = (year: string): Month[] =>
   })
 
 // دریافت تمامی روزها بین دو تاریخ مشخص
-export const getDaysBetweenDates = (
+export const getDaysBetweenDatesOLD = (
   startDate: string,
   endDate: string,
 ): Days[] => {
@@ -70,7 +72,6 @@ export const getDaysBetweenDates = (
   const daysArray: Days[] = []
   let index = -1
 
-  //@ts-ignore
   while (start.isSameOrBefore(end)) {
     const dayOfWeek = start.format('dddd')
     if (index === -1) index = weekDays.indexOf(dayOfWeek)
@@ -85,6 +86,38 @@ export const getDaysBetweenDates = (
     })
 
     start.add(1, 'day')
+    index++
+  }
+
+  return daysArray
+}
+
+
+export const getDaysBetweenDates = (
+  startDate: string,
+  endDate: string,
+): Days[] => {
+  let start = jDayjs(startDate)
+  const end = jDayjs(endDate)
+  const weekDays = ['شنبه', 'یک‌شنبه', 'دوشنبه', 'سه‌شنبه', 'چهارشنبه', 'پنج‌شنبه', 'آدینه']
+
+  const daysArray: Days[] = []
+  let index = -1
+  while (start.isSameOrBefore(end)) {
+    const dayOfWeek = start.format('dddd')
+    if (index === -1) index = weekDays.indexOf(dayOfWeek)
+
+    daysArray.push({
+      date: start.format('YYYY/MM/DD'),
+      dateEn: start.calendar('gregory').format('YYYY/MM/DD'),
+      day: +start.format('D'),
+      dayOfWeek,
+      index,
+      events: [],
+    })
+
+    // به‌روزرسانی `start` با یک روز بیشتر
+    start = start.add(1, 'day')
     index++
   }
 

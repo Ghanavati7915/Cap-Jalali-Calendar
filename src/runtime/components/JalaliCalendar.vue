@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {ref} from 'vue'
 // #region Import
 import { convertToJalali, getCurrentMonthAndYear, getDaysBetweenDates, getMonthsOfYear } from '../utils/timing'
 import type {
@@ -43,8 +44,8 @@ const props = defineProps({
 
 // #region Variables
 const loading = ref<boolean>(true)
-const current = ref<Current>(null)
-const selected = ref<Current>(null)
+const current = ref<Current | null>(null)
+const selected = ref<Current | null>(null)
 const monthSelectorModal = ref<boolean>(false)
 const months = ref<Month[]>([])
 const days = ref<Days[]>([])
@@ -63,19 +64,19 @@ const calendarCellCount = ref(35)
 
 // #region Functions
 const nextMonth = () => {
-  selected.value = getCurrentMonthAndYear(selected.value.year, selected.value.month, MonthAction.Next)
+  selected.value = getCurrentMonthAndYear(MonthAction.Next , selected.value?.year, selected.value?.month)
   fillMonths()
 }
 const prevMonth = () => {
-  selected.value = getCurrentMonthAndYear(selected.value.year, selected.value.month, MonthAction.Prev)
+  selected.value = getCurrentMonthAndYear(MonthAction.Next , selected.value?.year, selected.value?.month)
   fillMonths()
 }
 const currentMonth = () => {
-  selected.value = getCurrentMonthAndYear(selected.value.year, selected.value.month, MonthAction.Now)
+  selected.value = getCurrentMonthAndYear(MonthAction.Next , selected.value?.year, selected.value?.month)
   fillMonths()
 }
 const jumpMonth = (month: string) => {
-  selected.value = getCurrentMonthAndYear(current.value.year, month, MonthAction.Jump)
+  selected.value = getCurrentMonthAndYear(MonthAction.Next, current.value?.year, month)
   fillMonths()
 }
 const fillCurrent = () => {
@@ -84,15 +85,19 @@ const fillCurrent = () => {
   fillMonths()
 }
 const fillMonths = () => {
-  months.value = getMonthsOfYear(selected.value.year)
+  if (selected.value) months.value = getMonthsOfYear(selected.value.year)
   fillDays()
 }
 const fillDays = () => {
-  const selectedRange = months.value.find((month: Month) => month.name == selected.value.month)
-  emit('onChangeMonth', selectedRange)
-  days.value = getDaysBetweenDates(selectedRange.start, selectedRange.end)
-  generateDays()
-  pushEvents()
+  if(selected.value){
+    const selectedRange = months.value.find((month: Month) => month.name == selected.value?.month)
+    if (selectedRange){
+      emit('onChangeMonth', selectedRange)
+      days.value = getDaysBetweenDates(selectedRange.start, selectedRange.end)
+      generateDays()
+      pushEvents()
+    }
+  }
   loading.value = false
 }
 const generateDays = () => {
@@ -142,7 +147,7 @@ watch(
 
 // #region Constructor
 onMounted(async () => {
-  fillCurrent()
+   fillCurrent()
 })
 // #endregion
 </script>
